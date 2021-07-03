@@ -1,6 +1,15 @@
-import { ReactNode } from 'react';
-import { Flex, Text, IconButton, Input } from '@chakra-ui/react';
-import { BackIcon, LogoIcon, PinpointIcon, SettingIcon } from '@icons';
+import { ReactNode, useState } from 'react';
+import { useScrollPosition } from '@n8tb1t/use-scroll-position';
+import {
+  Flex,
+  Text,
+  IconButton,
+  Input,
+  InputGroup,
+  InputLeftElement,
+} from '@chakra-ui/react';
+import { BackIcon, LogoIcon, PinpointIcon, SearchIcon } from '@icons';
+import isScrolled from '../../utils/isScrolled';
 
 interface MobileHeaderProps {
   isHome?: boolean;
@@ -9,9 +18,9 @@ interface MobileHeaderProps {
   rightIcon?: ReactNode;
 }
 
-interface MobileDefaultHeaderProps<T extends true | false> {
+interface MobileDefaultHeaderProps {
   isHaveBackButton?: boolean;
-  rightIcon?: T extends true ? ReactNode : null;
+  rightIcon?: ReactNode;
   title?: string;
 }
 
@@ -33,8 +42,32 @@ const MobileHeader = ({
 };
 
 const MobileHomeHeader = () => {
+  const [isScrolled, setIsScrolled] = useState<boolean>(false);
+
+  useScrollPosition(({ prevPos, currPos }) => {
+    if (currPos.y === 0) {
+      setIsScrolled(false);
+    } else if (currPos.y < 0) {
+      setIsScrolled(true);
+    }
+  });
+
   return (
-    <Flex flexDir="column" alignItems="center" minHeight={180} px={4}>
+    <Flex
+      flexDir="column"
+      alignItems="center"
+      minHeight={180}
+      px={4}
+      position="fixed"
+      top={0}
+      width="100%"
+      maxWidth={444}
+      zIndex={1401}
+      bg="white"
+      borderBottom="1px solid #eaeaea"
+      boxShadow={isScrolled ? '#0000001a 0px 0px 15px 0px' : 'none'}
+      transition="all 250ms ease"
+    >
       <Flex alignItems="center" experimental_spaceX={2} mt={6} mb={2}>
         <LogoIcon colored w={8} h={8} />
       </Flex>
@@ -51,32 +84,58 @@ const MobileHomeHeader = () => {
           Ubah Lokasi
         </Text>
       </Flex>
-      <Flex w="100%" my={4} flexGrow={1}>
-        <Input
-          w="100%"
-          h="48px"
-          bg="blackAlpha.100"
-          borderRadius={15}
-          placeholder="Search"
-          focusBorderColor="green.400"
-        />
+      <Flex w="100%" alignItems="center" my={4} flexGrow={1}>
+        <InputGroup>
+          <InputLeftElement
+            pointerEvents="none"
+            children={<SearchIcon color="gray.300" />}
+            h="100%"
+            w={12}
+          />
+          <Input
+            w="100%"
+            h="48px"
+            pl={12}
+            bg="blackAlpha.100"
+            borderRadius={15}
+            placeholder="Search"
+            focusBorderColor="green.400"
+          />
+        </InputGroup>
       </Flex>
     </Flex>
   );
 };
 
-const MobileDefaultHeader = <T extends boolean>({
+const MobileDefaultHeader = ({
   title,
   isHaveBackButton,
   rightIcon,
-}: MobileDefaultHeaderProps<T>) => {
+}: MobileDefaultHeaderProps) => {
+  const [isScrolled, setIsScrolled] = useState<boolean>(false);
+
+  useScrollPosition(({ prevPos, currPos }) => {
+    if (currPos.y === 0) {
+      setIsScrolled(false);
+    } else if (currPos.y < 0) {
+      setIsScrolled(true);
+    }
+  });
+
   return (
     <Flex
       alignItems="center"
       justifyContent="space-between"
       minHeight="64px"
-      position="relative"
+      position="fixed"
       p={4}
+      width="100%"
+      maxWidth={444}
+      zIndex={1401}
+      bg={isScrolled ? 'white' : 'transparent'}
+      borderBottom={isScrolled ? '1px solid #eaeaea' : 'none'}
+      top={0}
+      transition="all 250ms ease"
     >
       <Flex w={8} h={8} alignItems="center" justifyContent="center">
         {isHaveBackButton && (
