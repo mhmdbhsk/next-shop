@@ -9,7 +9,6 @@ import {
   InputLeftElement,
 } from '@chakra-ui/react';
 import { BackIcon, LogoIcon, PinpointIcon, SearchIcon } from '@icons';
-import isScrolled from '../../utils/isScrolled';
 
 interface MobileHeaderProps {
   isHome?: boolean;
