@@ -1,5 +1,18 @@
 {
   "compilerOptions": {
+    "baseUrl": "src",
+    "paths": {
+      "@components/*": ["components/*"],
+      "@config/*": ["config/*"],
+      "@constants/*": ["constants/*"],
+      "@hooks/*": ["hooks/*"],
+      "@icons": ["assets/icons/index.ts"],
+      "@store/*": ["store/*"],
+      "@services/*": ["services/*"],
+      "@theme": ["theme/index.ts"],
+      "@types/*": ["types/*"],
+      "@utils/*": ["utils/*"]
+    },
     "target": "es5",
     "lib": ["dom", "dom.iterable", "esnext"],
     "allowJs": true,
