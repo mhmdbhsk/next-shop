@@ -98,7 +98,7 @@ const NavigationBar = ({}: NavigationBarProps) => {
             cursor="pointer"
             _hover={{ bg: 'blackAlpha.50' }}
             color={value === index ? 'green.400' : 'black'}
-            transition="all 0.3s ease-out"
+            transition=".3s all"
             borderTopLeftRadius={index === 0 ? '15px' : 0}
             borderTopRightRadius={index === menu.length - 1 ? '15px' : 0}
           >

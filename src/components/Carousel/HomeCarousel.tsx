@@ -63,6 +63,7 @@ const HomeCarousel = () => {
         emulateTouch
         renderIndicator={Dot}
         showThumbs={false}
+        showArrows={false}
         // onChange={onChange}
         // onClickItem={onClickItem}
         // onClickThumb={onClickThumb}

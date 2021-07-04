@@ -67,7 +67,7 @@ const MobileHomeHeader = () => {
       bg="white"
       borderBottom="1px solid #eaeaea"
       boxShadow={isScrolled ? '#0000001a 0px 0px 15px 0px' : 'none'}
-      transition="all 250ms ease"
+      transition=".3s all"
       borderBottomLeftRadius={20}
       borderBottomRightRadius={20}
     >
@@ -138,7 +138,7 @@ const MobileDefaultHeader = ({
       bg={isScrolled ? 'white' : 'transparent'}
       borderBottom={isScrolled ? '1px solid #eaeaea' : 'none'}
       top={0}
-      transition="all 250ms ease"
+      transition=".3s all"
     >
       <Flex w={8} h={8} alignItems="center" justifyContent="center">
         {isHaveBackButton && (
