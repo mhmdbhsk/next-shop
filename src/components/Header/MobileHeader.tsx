@@ -9,6 +9,7 @@ import {
   InputLeftElement,
 } from '@chakra-ui/react';
 import { BackIcon, LogoIcon, PinpointIcon, SearchIcon } from '@icons';
+import { useRouter } from 'next/dist/client/router';
 
 interface MobileHeaderProps {
   isHome?: boolean;
@@ -42,6 +43,7 @@ const MobileHeader = ({
 
 const MobileHomeHeader = () => {
   const [isScrolled, setIsScrolled] = useState<boolean>(false);
+  const router = useRouter();
 
   useScrollPosition(({ prevPos, currPos }) => {
     if (currPos.y === 0) {
@@ -79,7 +81,7 @@ const MobileHomeHeader = () => {
           color="green.400"
           fontSize="sm"
           cursor="pointer"
-          onClick={() => alert('Ubah Lokasi')}
+          onClick={() => router.push('/login')}
           _hover={{ textDecoration: 'underline' }}
         >
           Ubah Lokasi

@@ -7,7 +7,7 @@ interface LoginProps {}
 
 const Login = (props: LoginProps) => {
   return (
-    <Container>
+    <Container noPt>
       <MobileOnBoarding />
     </Container>
   );

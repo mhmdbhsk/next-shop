@@ -5,16 +5,18 @@ import {
 import DesktopContainer from './DesktopContainer';
 import MobileContainer from './MobileContainer';
 
-interface ContainerProps extends ChakraContainerProps {}
+interface ContainerProps extends ChakraContainerProps {
+  noPt?: boolean;
+}
 
-const Container = ({ children }: ContainerProps) => {
+const Container = ({ children, noPt }: ContainerProps) => {
   // const [isDesktop] = useMediaQuery('(min-width: 1280px)');
   const isDesktop = false;
 
   return isDesktop ? (
     <DesktopContainer>{children}</DesktopContainer>
   ) : (
-    <MobileContainer>{children}</MobileContainer>
+    <MobileContainer noPt={noPt}>{children}</MobileContainer>
   );
 };
 

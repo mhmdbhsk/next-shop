@@ -5,9 +5,11 @@ import {
 } from '@chakra-ui/react';
 import { useRouter } from 'next/dist/client/router';
 
-interface Props extends ChakraContainerProps {}
+interface MobileContainerProps extends ChakraContainerProps {
+  noPt?: boolean;
+}
 
-const MobileContainer = ({ children }: Props) => {
+const MobileContainer = ({ children, noPt }: MobileContainerProps) => {
   const router = useRouter();
   const [isHome, setIsHome] = useState(false);
 
@@ -27,7 +29,7 @@ const MobileContainer = ({ children }: Props) => {
       minH="100vh"
       h="100%"
       p={0}
-      pt={isHome ? '180px' : '64px'}
+      pt={noPt ? 0 : isHome ? '180px' : '64px'}
     >
       {children}
     </ChakraContainer>
