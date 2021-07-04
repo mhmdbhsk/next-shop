@@ -66,6 +66,8 @@ const MobileHomeHeader = () => {
       borderBottom="1px solid #eaeaea"
       boxShadow={isScrolled ? '#0000001a 0px 0px 15px 0px' : 'none'}
       transition="all 250ms ease"
+      borderBottomLeftRadius={20}
+      borderBottomRightRadius={20}
     >
       <Flex alignItems="center" experimental_spaceX={2} mt={6} mb={2}>
         <LogoIcon colored w={8} h={8} />
