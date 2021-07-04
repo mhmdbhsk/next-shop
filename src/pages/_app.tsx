@@ -4,8 +4,8 @@ import SEO from '../../next-seo.config';
 import { DefaultSeo } from 'next-seo';
 import theme from '@theme';
 import FontFace from 'theme/fonts';
-import Container from '@components/Container';
 import NextNprogress from 'nextjs-progressbar';
+import 'react-responsive-carousel/lib/styles/carousel.min.css';
 
 function MyApp({ Component, pageProps }: AppProps) {
   return (
