@@ -10,6 +10,7 @@ import {
 } from '@chakra-ui/react';
 import { BackIcon, LogoIcon, PinpointIcon, SearchIcon } from '@icons';
 import { useRouter } from 'next/dist/client/router';
+import TextField from '@components/TextField';
 
 interface MobileHeaderProps {
   isHome?: boolean;
@@ -88,7 +89,7 @@ const MobileHomeHeader = () => {
         </Text>
       </Flex>
       <Flex w="100%" alignItems="center" my={4} flexGrow={1}>
-        <InputGroup>
+        {/* <InputGroup>
           <InputLeftElement
             pointerEvents="none"
             children={<SearchIcon color="gray.300" />}
@@ -104,7 +105,11 @@ const MobileHomeHeader = () => {
             placeholder="Search"
             focusBorderColor="green.400"
           />
-        </InputGroup>
+        </InputGroup> */}
+        <TextField
+          leftIcon={<SearchIcon color="gray.300" />}
+          placeholder="Search"
+        />
       </Flex>
     </Flex>
   );

@@ -21,25 +21,25 @@ const menu = [
   },
   {
     id: 2,
-    route: '/',
+    route: '/explore',
     title: 'Explore',
     icon: ExploreIcon,
   },
   {
     id: 3,
-    route: '/',
+    route: '/cart',
     title: 'Cart',
     icon: CartIcon,
   },
   {
     id: 4,
-    route: '/',
+    route: '/favourites',
     title: 'Favourites',
     icon: FavouriteIcon,
   },
   {
     id: 5,
-    route: '/',
+    route: '/account',
     title: 'Account',
     icon: AccountIcon,
   },
@@ -90,6 +90,7 @@ const NavigationBar = ({}: NavigationBarProps) => {
         {menu.map((item, index) => (
           <GridItem
             key={index}
+            onClick={() => router.push(item.route)}
             h="100%"
             display="flex"
             flexDir="column"

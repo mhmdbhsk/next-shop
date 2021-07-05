@@ -4,11 +4,12 @@ import { ReactNode } from 'react';
 interface TextFieldProps {
   leftIcon: ReactNode;
   placeholder: string;
+  handleChange?: () => {};
 }
 
-const TextField = ({ leftIcon, placeholder }: TextFieldProps) => {
+const TextField = ({ leftIcon, placeholder, handleChange }: TextFieldProps) => {
   return (
-    <Flex w="100%" alignItems="center" my={4} flexGrow={1}>
+    <Flex w="100%" flexGrow={1}>
       <InputGroup>
         {leftIcon && (
           <InputLeftElement
@@ -27,6 +28,8 @@ const TextField = ({ leftIcon, placeholder }: TextFieldProps) => {
           borderRadius={15}
           placeholder={placeholder}
           focusBorderColor="green.400"
+          fontSize="sm"
+          onChange={handleChange}
         />
       </InputGroup>
     </Flex>

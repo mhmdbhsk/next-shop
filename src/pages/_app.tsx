@@ -17,7 +17,6 @@ function MyApp({ Component, pageProps }: AppProps) {
         height={3}
         showOnShallow={true}
       />
-
       <DefaultSeo {...SEO} />
       <Component {...pageProps} />
       <FontFace />

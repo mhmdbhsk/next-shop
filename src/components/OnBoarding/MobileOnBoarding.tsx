@@ -4,9 +4,11 @@ import Image from 'next/image';
 import Button from '@components/Button';
 import { LogoIcon } from '@icons';
 
-interface MobileOnBoardingProps {}
+interface MobileOnBoardingProps {
+  handleButton: (value: number) => void;
+}
 
-const MobileOnBoarding = (props: MobileOnBoardingProps) => {
+const MobileOnBoarding = ({ handleButton }: MobileOnBoardingProps) => {
   return (
     <Flex h="100vh" w="100%" position="relative">
       <Image
@@ -40,7 +42,12 @@ const MobileOnBoarding = (props: MobileOnBoardingProps) => {
         <Text color="whiteAlpha.600" mt={2} fontSize={['12px', '14px', '16px']}>
           Get your groceries in as fast as one hour
         </Text>
-        <Button title="Get Started" my={6} isWide={true} />
+        <Button
+          title="Get Started"
+          my={6}
+          isWide={true}
+          onClick={() => handleButton(1)}
+        />
       </Box>
     </Flex>
   );
