@@ -8,6 +8,7 @@
       "@hooks/*": ["hooks/*"],
       "@icons": ["assets/icons/index.ts"],
       "@store/*": ["store/*"],
+      "@action/*": ["store/action/*"],
       "@services/*": ["services/*"],
       "@theme": ["theme/index.ts"],
       "@types/*": ["types/*"],
