@@ -7,15 +7,17 @@ import theme from '@theme';
 import FontFace from 'theme/fonts';
 import NextNprogress from 'nextjs-progressbar';
 import { wrapper } from '@store/store';
-import { useStore } from 'react-redux';
 import { PersistGate } from 'redux-persist/integration/react';
-import MobileSplashScreen from '@components/SplashScreen/MobileSplashScreen';
+import { useStore } from 'react-redux';
+import MobileSplashScreen from '../components/SplashScreen/MobileSplashScreen';
 
-function MyApp({ Component, pageProps }: AppProps) {
-  const store = useStore((state) => state);
-
+function App({ Component, pageProps }: AppProps) {
+  const store = useStore();
   return (
-    <PersistGate loading={<MobileSplashScreen />} persistor={store.__persistor}>
+    <PersistGate
+      persistor={(store as any).persistor}
+      loading={<MobileSplashScreen />}
+    >
       <ChakraProvider theme={theme}>
         <NextNprogress
           color='#48BB78'
@@ -32,4 +34,4 @@ function MyApp({ Component, pageProps }: AppProps) {
   );
 }
 
-export default wrapper.withRedux(MyApp);
+export default wrapper.withRedux(App);

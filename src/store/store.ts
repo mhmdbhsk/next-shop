@@ -1,48 +1,49 @@
-import {
-  createStore,
-  applyMiddleware,
-  combineReducers,
-  Middleware,
-} from 'redux';
+import { AnyAction, ThunkAction, configureStore } from '@reduxjs/toolkit';
 import { createWrapper } from 'next-redux-wrapper';
+import { useDispatch } from 'react-redux';
+import { cartSlice } from './slice/cart';
 import { createLogger } from 'redux-logger';
-import thunkMiddleware from 'redux-thunk';
-import cart from './reducer/cart';
+import { combineReducers } from 'redux';
+import thunk from 'redux-thunk';
+import storage from 'redux-persist/lib/storage';
+import { persistReducer, persistStore } from 'redux-persist';
 
+const logger = createLogger({ collapsed: true });
 const combinedReducer = combineReducers({
-  cart,
+  cart: cartSlice.reducer,
 });
 
-const bindMiddleware = (middleware: any) => {
-  if (process.env.NODE_ENV !== 'production') {
-    const { composeWithDevTools } = require('redux-devtools-extension');
-    const logger = createLogger({ collapsed: true });
-    return composeWithDevTools(applyMiddleware(...middleware, logger));
-  }
-
-  return applyMiddleware(...middleware);
+const persistConfig = {
+  key: 'root',
+  storage,
+  whitelist: ['cart'],
 };
 
-const makeStore = ({ isServer }: any) => {
-  if (isServer) {
-    return createStore(combinedReducer, bindMiddleware([thunkMiddleware]));
-  } else {
-    const { persistStore, persistReducer } = require('redux-persist');
-    const storage = require('redux-persist/lib/storage').default;
+const persistedReducer = persistReducer(persistConfig, combinedReducer);
 
-    const persistConfig = { key: 'root', whitelist: ['cart'], storage };
+const makeStore = () => {
+  const store = configureStore({
+    reducer: persistedReducer,
+    middleware: (getDefaultMiddleware) =>
+      getDefaultMiddleware().prepend([thunk]).concat(logger),
+    devTools: process.env.NODE_ENV !== 'production',
+  });
 
-    const persistedReducer = persistReducer(persistConfig, combinedReducer);
+  (store as any).persistor = persistStore(store);
 
-    const store = createStore(
-      persistedReducer,
-      bindMiddleware([thunkMiddleware])
-    );
-
-    store.__persistor = persistStore(store);
-
-    return store;
-  }
+  return store;
 };
 
-export const wrapper = createWrapper(makeStore);
+export type AppStore = ReturnType<typeof makeStore>;
+export type AppState = ReturnType<AppStore['getState']>;
+export type AppDispatch = AppStore['dispatch'];
+export type AppThunkAction<ReturnType = Promise<void>> = ThunkAction<
+  ReturnType,
+  AppState,
+  unknown,
+  AnyAction
+>;
+
+export const useAppDispatch = () => useDispatch<AppDispatch>();
+
+export const wrapper = createWrapper<AppStore>(makeStore, { debug: true });

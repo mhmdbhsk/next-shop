@@ -1,7 +1,12 @@
-import { extendTheme, theme as chakraTheme } from '@chakra-ui/react';
+import {
+  extendTheme,
+  theme as chakraTheme,
+  ThemeOverride,
+} from '@chakra-ui/react';
+
 import colors from './colors';
 
-const theme: typeof chakraTheme = extendTheme({
+const theme: typeof chakraTheme = extendTheme(<ThemeOverride>{
   colors,
   fonts: {
     heading: 'Gilroy Bold',
@@ -18,6 +23,13 @@ const theme: typeof chakraTheme = extendTheme({
     Button: {
       baseStyle: {
         fontFamily: 'Gilroy Regular',
+      },
+    },
+  },
+  styles: {
+    global: {
+      html: {
+        scrollBehavior: 'smooth',
       },
     },
   },
